@@ -9,19 +9,22 @@
 
   <body>
     <div class="flex h-screen">
+      <!-- sidebar content overlay /lg--/ -->
+      <div
+        class="fixed inset-0 z-10 hidden bg-black opacity-50 lg:hidden"
+        id="js--sidebar-content-overlay"
+      ></div>
+      <!-- != sidebar content overlay /lg--/ -->
       <!-- sidebar -->
       <div
         id="js--sidebar"
-        class="fixed inset-0 z-10 hidden w-64 px-8 py-4 overflow-auto bg-gray-100 border-r lg:block lg:relative"
+        class="fixed inset-0 z-30 w-64 px-8 py-4 overflow-auto transition duration-500 transform -translate-x-full bg-gray-100 border-r lg:translate-x-0 lg:block lg:static lg:inset-auto"
       >
         <div class="flex items-center justify-between pl-3 pr-2 -mx-3">
           <span>
             <img src="img/logo_sm.png" alt="logo small" class="h-9 w-9" />
           </span>
-          <button
-            onclick="toggleSidebar();"
-            class="text-gray-700 blcok lg:hidden"
-          >
+          <button onclick="toggleSidebar();" class="text-gray-700 lg:hidden">
             <svg
               class="w-6 h-6"
               fill="none"
@@ -140,38 +143,65 @@
       <!-- != sidebar -->
       <!-- header -->
       <div class="flex flex-col flex-1 min-w-0 bg-white">
-        <div class="flex-shrink-0 border-b-2 border-gray-200">
-          <header class="px-6">
-            <div
-              class="flex items-center justify-between py-3 border-b border-gray-200"
-            >
-              <div class="flex flex-1">
-                <!-- sidebar-toggler -->
-                <button
-                  id="js--sidebar-toggler"
-                  onclick="toggleSidebar();"
-                  class="text-gray-600 lg:hidden"
-                >
-                  <svg
-                    class="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 6h16M4 12h16M4 18h7"
-                    />
-                  </svg>
-                </button>
-                <div class="relative w-64 ml-3 lg:ml-0">
-                  <span
-                    class="absolute inset-y-0 left-0 flex items-center pl-3"
+        <div class="flex-shrink-0 sm:border-b-2 sm:border-gray-200">
+          <header class="">
+            <div class="px-6">
+              <div
+                class="flex items-center justify-between py-3 border-b border-gray-200"
+              >
+                <div class="flex flex-1 min-w-0">
+                  <!-- sidebar-toggler -->
+                  <button
+                    id="js--sidebar-toggler"
+                    onclick="toggleSidebar();"
+                    class="text-gray-600 lg:hidden"
                   >
                     <svg
-                      class="w-6 h-6 text-gray-600"
+                      class="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h7"
+                      />
+                    </svg>
+                  </button>
+                  <!-- != sidebar toggler -->
+                  <!-- search input -->
+                  <div class="relative w-64 ml-3 flex-shrink-1 lg:ml-0">
+                    <span
+                      class="absolute inset-y-0 left-0 flex items-center pl-3"
+                    >
+                      <svg
+                        class="w-6 h-6 text-gray-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        />
+                      </svg>
+                    </span>
+                    <input
+                      type="text"
+                      class="block w-full py-2 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-600 border border-gray-400 rounded-md botder"
+                      placeholder="Search"
+                    />
+                  </div>
+                  <!-- != search input -->
+                </div>
+                <div class="flex items-center flex-shrink-0 ml-6">
+                  <button>
+                    <svg
+                      class="w-6 h-6 text-gray-500"
                       fill="none"
                       viewBox="0 0 24 24"
                     >
@@ -180,127 +210,159 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                       />
                     </svg>
-                  </span>
-                  <input
-                    type="text"
-                    class="block w-full py-2 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-600 border border-gray-400 rounded-md botder"
-                    placeholder="Search"
-                  />
+                  </button>
+                  <button class="ml-6">
+                    <img
+                      class="object-cover rounded-full h-9 w-9"
+                      src="img/user-2.png"
+                      alt="user avatar"
+                    />
+                  </button>
                 </div>
               </div>
-              <div class="flex items-center">
-                <button>
-                  <svg
-                    class="w-6 h-6 text-gray-500"
-                    fill="none"
-                    viewBox="0 0 24 24"
+              <div class="flex items-center justify-between py-2">
+                <div class="sm:flex sm:items-center">
+                  <h2
+                    class="text-2xl font-semibold leading-tight text-gray-900"
                   >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                    />
-                  </svg>
-                </button>
-                <button class="ml-6">
-                  <img
-                    class="object-cover rounded-full h-9 w-9"
-                    src="img/user-2.png"
-                    alt="user avatar"
-                  />
-                </button>
-              </div>
-            </div>
-            <div class="flex items-center justify-between py-2">
-              <div class="flex items-center">
-                <h2 class="text-2xl font-semibold leading-tight text-gray-900">
-                  All Issues
-                </h2>
-                <div class="flex items-center ml-6">
-                  <span class="-ml-2 border-2 border-white rounded-full">
-                    <img
-                      class="object-cover w-6 h-6 rounded-full"
-                      src="img/user-1.png"
-                      alt="user1"
-                    />
+                    All Issues
+                  </h2>
+                  <div class="flex items-center mt-1 sm:ml-6 sm:mt-0">
+                    <span class="-ml-2 border-2 border-white rounded-full">
+                      <img
+                        class="object-cover w-6 h-6 rounded-full"
+                        src="img/user-1.png"
+                        alt="user1"
+                      />
+                    </span>
+                    <span class="-ml-2 border-2 border-white rounded-full">
+                      <img
+                        class="object-cover w-6 h-6 rounded-full"
+                        src="img/user-3.png"
+                        alt="user3"
+                      />
+                    </span>
+                    <span class="-ml-2 border-2 border-white rounded-full">
+                      <img
+                        class="object-cover w-6 h-6 rounded-full"
+                        src="img/user-4.png"
+                        alt="user4"
+                      />
+                    </span>
+                    <span class="-ml-2 border-2 border-white rounded-full">
+                      <img
+                        class="object-cover w-6 h-6 rounded-full"
+                        src="img/user-5.png"
+                        alt="user5"
+                      />
+                    </span>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <!-- view toggle buttons /lg++/ -->
+                  <span
+                    class="hidden p-1 bg-gray-200 border rounded-md sm:inline-flex"
+                  >
+                    <button class="px-2 py-1 rounded">
+                      <svg
+                        class="w-6 h-6 text-gray-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                        />
+                      </svg>
+                    </button>
+                    <button class="px-2 py-1 bg-white rounded shadow">
+                      <svg
+                        class="w-6 h-6 text-gray-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+                        />
+                      </svg>
+                    </button>
                   </span>
-                  <span class="-ml-2 border-2 border-white rounded-full">
-                    <img
-                      class="object-cover w-6 h-6 rounded-full"
-                      src="img/user-3.png"
-                      alt="user3"
-                    />
-                  </span>
-                  <span class="-ml-2 border-2 border-white rounded-full">
-                    <img
-                      class="object-cover w-6 h-6 rounded-full"
-                      src="img/user-4.png"
-                      alt="user4"
-                    />
-                  </span>
-                  <span class="-ml-2 border-2 border-white rounded-full">
-                    <img
-                      class="object-cover w-6 h-6 rounded-full"
-                      src="img/user-5.png"
-                      alt="user5"
-                    />
-                  </span>
+                  <!-- != view toggle buttons -->
+                  <!-- new issue button -->
+                  <button
+                    class="flex items-center py-2 pl-2 pr-4 ml-5 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-700"
+                  >
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24">
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
+                    </svg>
+                    <span class="ml-1">New Issue</span>
+                  </button>
+                  <!-- != new issue button -->
                 </div>
               </div>
-              <div class="flex items-center">
-                <span class="inline-flex p-1 bg-gray-200 border rounded-md">
-                  <button class="px-2 py-1 rounded">
-                    <svg
-                      class="w-6 h-6 text-gray-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 6h16M4 10h16M4 14h16M4 18h16"
-                      />
-                    </svg>
-                  </button>
-                  <button class="px-2 py-1 bg-white rounded shadow">
-                    <svg
-                      class="w-6 h-6 text-gray-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
-                      />
-                    </svg>
-                  </button>
-                </span>
-                <button
-                  class="flex items-center py-2 pl-2 pr-4 ml-5 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-700"
-                >
-                  <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24">
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg>
-                  <span class="ml-1">New Issue</span>
-                </button>
-              </div>
             </div>
+            <!-- view toggle buttons /lg--/ -->
+            <div class="flex p-1 px-4 bg-gray-200 border-t border-b sm:hidden">
+              <button
+                class="inline-flex items-center justify-center w-1/2 px-2 py-1 rounded"
+              >
+                <svg
+                  class="w-6 h-6 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                  />
+                </svg>
+                <span
+                  class="ml-2 text-sm font-medium leading-none text-gray-600"
+                  >List</span
+                >
+              </button>
+              <button
+                class="inline-flex items-center justify-center w-1/2 px-2 py-1 bg-white rounded shadow"
+              >
+                <svg
+                  class="w-6 h-6 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+                  />
+                </svg>
+                <span
+                  class="ml-2 text-sm font-medium leading-none text-gray-900"
+                  >Board</span
+                >
+              </button>
+            </div>
+            <!-- != view toggle buttons -->
           </header>
         </div>
         <!-- != header -->
